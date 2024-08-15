@@ -7,7 +7,7 @@
 
   outputs = { self, nixpkgs, flake-utils, treefmt-nix, ... }:
     {
-      buildJanetPackage = pkgs: import ./default.nix {
+      buildJanetPackage = pkgs: import ./lib/buildJanetPackage.nix {
         inherit pkgs;
       };
     } //
