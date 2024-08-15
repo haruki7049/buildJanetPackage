@@ -8,7 +8,7 @@
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        janetBuilder = import ../../buildJanetPackage.nix { inherit pkgs; };
+        janetBuilder = import ../.. { inherit pkgs; };
 
         simple = janetBuilder.buildJanetPackage {
           pname = "simple";
