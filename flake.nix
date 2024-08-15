@@ -6,7 +6,11 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, treefmt-nix, ... }:
-    { } //
+    {
+      buildJanetPackage = pkgs: import ./default.nix {
+        inherit pkgs;
+      };
+    } //
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
