@@ -1,4 +1,4 @@
-name: deno-drv-checker
+name: nix-drv-checker
 on:
   push:
 permissions: {}
