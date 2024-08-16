@@ -12,7 +12,7 @@
         janetBuilder = import buildJanetPackage { inherit pkgs; };
 
         simple-flakes = janetBuilder.buildJanetPackage {
-          pname = "simple-flakes";
+          pname = "http-server";
           version = "0.1.0";
           src = ./.;
         };
