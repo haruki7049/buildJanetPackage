@@ -11,7 +11,7 @@
         pkgs = import nixpkgs { inherit system; };
         janetBuilder = import buildJanetPackage { inherit pkgs; };
 
-        simple-flakes = janetBuilder.buildJanetPackage {
+        http-server = janetBuilder.buildJanetPackage {
           pname = "http-server";
           version = "0.1.0";
           src = ./.;
@@ -26,8 +26,8 @@
         };
 
         packages = {
-          inherit simple-flakes;
-          default = simple-flakes;
+          inherit http-server;
+          default = http-server;
         };
       });
 }
