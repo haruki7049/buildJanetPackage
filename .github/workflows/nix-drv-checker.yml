@@ -28,3 +28,16 @@ jobs:
       - name: Build test case
         working-directory: examples/simple-flakes
         run: nix build .#simple-flakes
+
+  check-http-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v26
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+      - name: Build test case
+        working-directory: examples/http-server
+        run: nix build .#http-server
