@@ -20,5 +20,11 @@
         formatter = treefmtEval.config.build.wrapper;
 
         checks.formatting = treefmtEval.config.build.check self;
+
+        devShells.default = pkgs.mkShell {
+          packages = [
+            pkgs.nixd
+          ];
+        };
       });
 }
