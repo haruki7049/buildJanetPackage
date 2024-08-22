@@ -24,6 +24,7 @@
         devShells.default = pkgs.mkShell {
           packages = [
             pkgs.nixd
+            pkgs.nil
           ];
         };
       });
