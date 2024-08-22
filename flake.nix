@@ -17,6 +17,7 @@
         treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
         examples = {
           simple = pkgs.callPackage ./examples/simple/default.nix { };
+          http-server = pkgs.callPackage ./examples/http-server/default.nix { };
         };
       in
       {
@@ -24,7 +25,7 @@
 
         checks = {
           formatting = treefmtEval.config.build.check self;
-          inherit (examples) simple;
+          inherit (examples) simple http-server;
         };
 
         devShells.default = pkgs.mkShell {
