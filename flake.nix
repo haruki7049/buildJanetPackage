@@ -15,11 +15,17 @@
       let
         pkgs = import nixpkgs { inherit system; };
         treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+        examples = {
+          simple = pkgs.callPackage ./examples/simple/default.nix { };
+        };
       in
       {
         formatter = treefmtEval.config.build.wrapper;
 
-        checks.formatting = treefmtEval.config.build.check self;
+        checks = {
+          formatting = treefmtEval.config.build.check self;
+          inherit (examples) simple;
+        };
 
         devShells.default = pkgs.mkShell {
           packages = [
