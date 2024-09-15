@@ -30,8 +30,12 @@
 
         devShells.default = pkgs.mkShell {
           packages = [
-            pkgs.nixd
+            # Nix
             pkgs.nil
+
+            # Janet
+            pkgs.janet
+            pkgs.jpm
           ];
         };
       });
