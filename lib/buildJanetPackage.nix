@@ -11,7 +11,7 @@
     }:
     let
       stdenv = pkgs.stdenv;
-      vendor = pkgs.callPackage ./make-vendors.nix { inherit deps; };
+      vendor = pkgs.callPackage ./make-vendor.nix { inherit deps; };
     in
     stdenv.mkDerivation {
       inherit pname version src;
