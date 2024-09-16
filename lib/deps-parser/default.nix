@@ -8,16 +8,14 @@
 let
   stdenv = pkgs.stdenv;
   lib = pkgs.lib;
-  fetchFromGitHub = pkgs.fetchFromGitHub;
-  spork = stdenv.mkDerivation rec {
-    pname = "spork";
-    version = "0-unstable-2024-09-12";
 
-    src = fetchFromGitHub {
-      owner = "janet-lang";
-      repo = pname;
-      rev = "253a67e89dca695632283ef60f77851311c404c9";
-      hash = "sha256-+XZaTThLm75IsifMM0IAPasZwCv42MmI9+e2sy+jl1o=";
+  deps = import ./deps.nix;
+
+  deps-fetcher = { name, url, hash }: stdenv.mkDerivation {
+    inherit name;
+
+    src = pkgs.fetchurl {
+      inherit url hash;
     };
 
     buildInputs = [
@@ -35,6 +33,8 @@ let
     '';
   };
 
+  vendors = builtins.listToAttrs (map (v: { name = v.name; value = deps-fetcher { inherit (v) name url hash; }; }) deps);
+
   vendor = stdenv.mkDerivation {
     name = "vendor";
 
@@ -44,8 +44,8 @@ let
 
     installPhase = ''
       mkdir -p $out/lib
-      cp -r ${spork}/lib/* $out/lib
-      cp -r ${pkgs.jpm}/lib/janet/* $out/lib
+      cp -r ${vendors.spork}/lib/* $out/lib
+      cp -r ${vendors.jpm}/lib/* $out/lib
     '';
   };
 in
