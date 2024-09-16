@@ -9,7 +9,7 @@ let
   janetBuilder = import ../../default.nix { inherit pkgs; };
 in
 janetBuilder.buildJanetPackage {
-  pname = "simple";
+  pname = "janet-lsp";
   version = "0.1.0";
   src = ./.;
   depsFile = ./deps.nix;
