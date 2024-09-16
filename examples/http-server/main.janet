@@ -5,4 +5,5 @@
  {:status 200
   :headers {"Content-Type" "text/html"} :body "<!doctype html><html><body><h1>Hello.</h1></body></html>"})
 
-(circlet/server myserver 8000)
+(defn main [& args]
+  (circlet/server myserver 8000))
