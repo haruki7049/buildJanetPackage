@@ -24,6 +24,7 @@
         examples = {
           simple = pkgs.callPackage ./examples/simple/default.nix { };
           http-server = pkgs.callPackage ./examples/http-server/default.nix { };
+          deps-parser = pkgs.callPackage ./examples/deps-parser/default.nix { };
         };
       in
       {
