@@ -8,9 +8,14 @@
 let
   janetBuilder = import ../../default.nix { inherit pkgs; };
 in
-janetBuilder.buildJanetPackage {
+janetBuilder.buildJanetPackage rec {
   pname = "janet-lsp";
-  version = "0.1.0";
-  src = ./.;
+  version = "0.0.7";
+  src = pkgs.fetchFromGitHub {
+    owner = "CFiggers";
+    repo = pname;
+    rev = "v${version}";
+    hash = "sha256-hda4pEj5VsQsvTPLEYI34kE5iL8cldMzthpsl2jmU7U=";
+  };
   depsFile = ./deps.nix;
 }
