@@ -5,13 +5,19 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, treefmt-nix, ... }:
+  outputs =
     {
-      buildJanetPackage = pkgs: import ./lib/buildJanetPackage.nix {
-        inherit pkgs;
-      };
-    } //
-    flake-utils.lib.eachDefaultSystem (system:
+      self,
+      nixpkgs,
+      flake-utils,
+      treefmt-nix,
+      ...
+    }:
+    {
+      buildJanetPackage = pkgs: import ./lib/buildJanetPackage.nix { inherit pkgs; };
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs { inherit system; };
         treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
@@ -38,5 +44,6 @@
             pkgs.jpm
           ];
         };
-      });
+      }
+    );
 }
