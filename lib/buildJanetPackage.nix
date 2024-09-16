@@ -13,29 +13,38 @@
       stdenv = pkgs.stdenv;
       lib = pkgs.lib;
 
-      deps-fetcher = { name, url, hash }: stdenv.mkDerivation {
-        inherit name;
+      deps-fetcher =
+        {
+          name,
+          url,
+          hash,
+        }:
+        stdenv.mkDerivation {
+          inherit name;
 
-        src = pkgs.fetchurl {
-          inherit url hash;
+          src = pkgs.fetchurl { inherit url hash; };
+
+          buildInputs = [
+            pkgs.janet
+            pkgs.jpm
+          ];
+
+          buildPhase = ''
+            jpm install --local
+          '';
+
+          installPhase = ''
+            mkdir -p $out/lib
+            cp -r jpm_tree/lib/* $out/lib
+          '';
         };
 
-        buildInputs = [
-          pkgs.janet
-          pkgs.jpm
-        ];
-
-        buildPhase = ''
-          jpm install --local
-        '';
-
-        installPhase = ''
-          mkdir -p $out/lib
-          cp -r jpm_tree/lib/* $out/lib
-        '';
-      };
-
-      vendorSet = builtins.listToAttrs (map (v: { name = v.name; value = deps-fetcher { inherit (v) name url hash; }; }) deps);
+      vendorSet = builtins.listToAttrs (
+        map (v: {
+          name = v.name;
+          value = deps-fetcher { inherit (v) name url hash; };
+        }) deps
+      );
 
       vendorPaths = map (v: v.outPath) (builtins.attrValues vendorSet);
 
