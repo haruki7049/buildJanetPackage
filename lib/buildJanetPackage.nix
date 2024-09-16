@@ -23,6 +23,7 @@
       buildInputs = [
         pkgs.janet
         pkgs.jpm
+        pkgs.git
         vendor
       ];
 

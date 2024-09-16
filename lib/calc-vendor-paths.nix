@@ -8,12 +8,13 @@ let
     {
       name,
       url,
+      rev,
       hash,
     }:
     pkgs.stdenv.mkDerivation {
       inherit name;
 
-      src = pkgs.fetchurl { inherit url hash; };
+      src = pkgs.fetchgit { inherit url rev hash; leaveDotGit = true;};
 
       buildInputs = [
         pkgs.janet
@@ -33,7 +34,7 @@ let
   vendorSet = builtins.listToAttrs (
     map (v: {
       name = v.name;
-      value = deps-fetcher { inherit (v) name url hash; };
+      value = deps-fetcher { inherit (v) name url rev hash; };
     }) dep-sources
   );
 in
