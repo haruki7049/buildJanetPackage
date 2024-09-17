@@ -37,7 +37,7 @@
 
       installPhase = ''
         mkdir -p $out/bin
-        install -m755 build/${pname} $out/bin/${pname}-${version}
+        install -m755 build/${pname} $out/bin/${pname}
       '';
     };
 }
