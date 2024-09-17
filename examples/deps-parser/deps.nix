@@ -3,7 +3,7 @@
     name = "spork";
     url = "https://github.com/janet-lang/spork";
     rev = "253a67e89dca695632283ef60f77851311c404c9";
-    hash = "sha256-OnfD1w4KCKAQ101+NehSWOdDGgHjhdctb9AXHNzo/28=";
+    hash = "sha256-I5cOrJ9/3p2LAimQxnJR6etdxvLuZFfundOucgz5nok=";
     deps = [ ];
   }
   {
