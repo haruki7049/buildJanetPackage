@@ -41,7 +41,7 @@
         src = fetchgit {
           url = "https://github.com/ianthehenry/cmd";
           rev = "b4308de361d0f90dd96cc0f9a8dc6881e0e851c6";
-          hash = "";
+          hash = "sha256-FG11D8/+ZDHudi6PXy0tKFYCbHUyy0KOqMoZJyFCm9s=";
         };
         deps = [ ];
       }
