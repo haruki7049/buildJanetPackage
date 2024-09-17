@@ -2,10 +2,7 @@
 
 let
   deps-fetcher =
-    {
-      name,
-      src,
-    }:
+    { name, src }:
     pkgs.stdenv.mkDerivation {
       inherit name src;
 
@@ -27,12 +24,7 @@ let
   vendorSet = builtins.listToAttrs (
     map (v: {
       name = v.name;
-      value = deps-fetcher {
-        inherit (v)
-          name
-          src
-          ;
-      };
+      value = deps-fetcher { inherit (v) name src; };
     }) dep-sources
   );
 in
