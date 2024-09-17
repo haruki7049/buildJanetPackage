@@ -13,8 +13,8 @@
       stdenv = pkgs.stdenv;
 
       # vendor is drv.
-      vendor = pkgs.callPackage ./make-vendor.nix {
-        vendorPaths = pkgs.callPackage ./calc-vendor-paths.nix { dep-sources = deps; };
+      vendor = pkgs.callPackage ./vendor {
+        vendorPaths = pkgs.callPackage ./vendor/calc-vendor-paths.nix { dep-sources = deps; };
       };
     in
     stdenv.mkDerivation {
