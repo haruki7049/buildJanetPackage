@@ -1,5 +1,8 @@
 # buildJanetPackage
 
+## This is early project
+This buildJanetPackage is not support `declare-binscript` in `project.janet`, so you must use `declare-executable` instead of `declare-binscript`, in `project.janet`.
+
 ## Usage
 Write below files, then use `nix build .#http-server`
 
