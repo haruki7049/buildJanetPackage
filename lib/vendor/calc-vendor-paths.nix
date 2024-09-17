@@ -2,15 +2,19 @@
 
 let
   deps-fetcher =
-    { name, src, deps }:
+    {
+      name,
+      src,
+      deps,
+    }:
     let
       vendor =
-      if builtins.length deps != 0 then
-        pkgs.callPackage ./default.nix {
-          vendorPaths = pkgs.callPackage ./calc-vendor-paths.nix { dep-sources = deps; };
-        }
-      else
-        null;
+        if builtins.length deps != 0 then
+          pkgs.callPackage ./default.nix {
+            vendorPaths = pkgs.callPackage ./calc-vendor-paths.nix { dep-sources = deps; };
+          }
+        else
+          null;
     in
     pkgs.stdenv.mkDerivation {
       inherit name src;
