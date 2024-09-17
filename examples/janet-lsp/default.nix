@@ -11,11 +11,11 @@ in
 janetBuilder.buildJanetPackage rec {
   pname = "janet-lsp";
   version = "0.0.7";
-  src = pkgs.fetchFromGitHub {
-    owner = "CFiggers";
-    repo = pname;
-    rev = "v${version}";
-    hash = "sha256-hda4pEj5VsQsvTPLEYI34kE5iL8cldMzthpsl2jmU7U=";
+  src = pkgs.fetchgit {
+    url = "https://github.com/CFiggers/${pname}";
+    rev = "204e22c74f328173cc4f83b80b7b06ec4afb6f19";
+    hash = "sha256-1rP8sZ9ymboCKRn/sTksu7rkfoyGaMGnXU8sbVTckJI=";
+    leaveDotGit = true;
   };
   depsFile = ./deps.nix;
 }

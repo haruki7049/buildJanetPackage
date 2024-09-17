@@ -4,17 +4,10 @@ let
   deps-fetcher =
     {
       name,
-      url,
-      rev,
-      hash,
+      src,
     }:
     pkgs.stdenv.mkDerivation {
-      inherit name;
-
-      src = pkgs.fetchgit {
-        inherit url rev hash;
-        leaveDotGit = true;
-      };
+      inherit name src;
 
       buildInputs = [
         pkgs.janet
@@ -37,9 +30,7 @@ let
       value = deps-fetcher {
         inherit (v)
           name
-          url
-          rev
-          hash
+          src
           ;
       };
     }) dep-sources

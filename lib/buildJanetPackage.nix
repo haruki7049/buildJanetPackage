@@ -7,7 +7,7 @@
       version,
       src,
       depsFile,
-      deps ? import depsFile,
+      deps ? pkgs.callPackage depsFile { },
     }:
     let
       stdenv = pkgs.stdenv;
