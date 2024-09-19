@@ -27,6 +27,7 @@
             simple = pkgs.callPackage ./examples/unstable/simple { };
             http-server = pkgs.callPackage ./examples/unstable/http-server { };
             deps-parser = pkgs.callPackage ./examples/unstable/deps-parser { };
+            janet-lsp = pkgs.callPackage ./examples/unstable/janet-lsp { };
             simple-v0-1-0 = pkgs.callPackage ./examples/v0.1.0/simple { };
           };
         in
@@ -49,6 +50,7 @@
               simple
               simple-v0-1-0
               http-server
+              janet-lsp
               deps-parser
               ;
           };
