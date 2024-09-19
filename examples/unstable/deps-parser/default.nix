@@ -6,7 +6,7 @@
 }:
 
 let
-  janetBuilder = import ../../default.nix { inherit pkgs; };
+  janetBuilder = import ../../../default.nix { inherit pkgs; };
   lib = pkgs.lib;
 in
 janetBuilder.buildJanetPackage {
