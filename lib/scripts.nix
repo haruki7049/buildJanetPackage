@@ -33,7 +33,9 @@ in
   buildPhase =
     if length binscriptFiles != 0 then
     ''
-      jpm install
+      mkdir -p jpm_tree/lib
+      cp -r ${vendor}/lib/* jpm_tree/lib
+      jpm install --local
     ''
     else
     ''
