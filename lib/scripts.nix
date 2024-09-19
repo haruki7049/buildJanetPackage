@@ -36,7 +36,7 @@ in
     if length binscriptFiles != 0 then
       ''
         mkdir -p jpm_tree/lib
-        cp -r ${vendor}/lib/* jpm_tree/lib
+        cp -r ${vendor}/* jpm_tree/
         jpm install --local
       ''
     else
