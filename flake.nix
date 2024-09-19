@@ -25,7 +25,7 @@
           simple = pkgs.callPackage ./examples/unstable/simple/default.nix { };
           http-server = pkgs.callPackage ./examples/unstable/http-server/default.nix { };
           deps-parser = pkgs.callPackage ./examples/unstable/deps-parser/default.nix { };
-          simple-v0-1-0 = pkgs.callPackage ./examples/v0.1.0/simple { };
+          simple-v0-1-0 = pkgs.callPackage ./examples/v0.1.0/simple/default.nix { };
         };
       in
       {
@@ -33,8 +33,7 @@
 
         checks = {
           formatting = treefmtEval.config.build.check self;
-          inherit
-            (examples)
+          inherit (examples)
             simple
             simple-v0-1-0
             http-server
