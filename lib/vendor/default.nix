@@ -14,6 +14,7 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/lib
-    ${lib.strings.concatLines (map (v: "cp -r ${v}/lib/* $out/lib") vendorPaths)}
+    mkdir -p $out/bin
+    ${lib.strings.concatLines (map (v: "cp -r ${v}/.* ${v}/* $out") vendorPaths)}
   '';
 }

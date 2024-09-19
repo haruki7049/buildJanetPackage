@@ -34,6 +34,6 @@
       JANET_LIBPATH = "${pkgs.janet}/lib";
       JANET_MODPATH = "${vendor}/lib";
 
-      inherit (pkgs.callPackage ./scripts.nix { inherit pname executableFiles binscriptFiles doCheck; }) installPhase configurePhase buildPhase;
+      inherit (pkgs.callPackage ./scripts.nix { inherit pname executableFiles binscriptFiles doCheck vendor; }) installPhase configurePhase buildPhase;
     };
 }

@@ -4,31 +4,41 @@
   executableFiles,
   binscriptFiles,
   doCheck,
+  vendor,
 }:
 
 let
   lib = pkgs.lib;
+  length = builtins.length;
 in
 
 {
   installPhase = "mkdir -p $out/bin\n"
     +
-    (if builtins.length executableFiles != 0 && builtins.length binscriptFiles != 0 then
-      throw "TODO: binscriptFiles is not implemented"
-    else if builtins.length executableFiles != 0 && builtins.length binscriptFiles == 0 then
+    (if length executableFiles != 0 && length binscriptFiles != 0 then
+      throw "TODO: using binscriptFiles and executableFiles is not implemented"
+    else if length executableFiles != 0 && length binscriptFiles == 0 then
       ''
         ${lib.strings.concatLines (map (v: "install -m755 build/${v} $out/bin/${v}") executableFiles)}
       ''
-    else if builtins.length executableFiles == 0 && builtins.length binscriptFiles != 0 then
-      throw "TODO: binscriptFiles is not implemented"
+    else if length executableFiles == 0 && length binscriptFiles != 0 then
+      ''
+        ${lib.strings.concatLines (map (v: "install -m755 jpm_tree/bin/${v} $out/bin/${v}") binscriptFiles)}
+      ''
     else
       ''
         install -m755 build/${pname} $out/bin/${pname}
       '');
 
-  buildPhase = ''
-    jpm build
-  '';
+  buildPhase =
+    if length binscriptFiles != 0 then
+    ''
+      jpm install
+    ''
+    else
+    ''
+      jpm build
+    '';
 
   configurePhase =
     if doCheck then
@@ -37,4 +47,7 @@ in
       ''
       else
       "";
+
+  JANET_MODPATH =
+      "${vendor}/lib";
 }
