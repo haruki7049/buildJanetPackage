@@ -21,6 +21,7 @@
             <p>This site is hosted under MIT license using GitHub Pages.</p>
             <p>Repository: <a href="https://github.com/haruki7049/buildJanetPackage">https://github.com/haruki7049/buildJanetPackage</a></p>
             <p>BTW, I use NixOS. Wanna use NixOS? <a href="https://nixos.org">https://nixos.org</a></p>
+            <a href="https://janet-lang.org/">janet-lang's homepage</a>
         </footer>
     </body>
 </html>
