@@ -7,6 +7,7 @@
       version,
       src,
       depsFile,
+      doCheck ? false,
       deps ? pkgs.callPackage depsFile { },
     }:
     let
@@ -30,6 +31,14 @@
       JANET_PATH = "${pkgs.janet}/lib";
       JANET_LIBPATH = "${pkgs.janet}/lib";
       JANET_MODPATH = "${vendor}/lib";
+
+      configurePhase =
+        if doCheck then
+        ''
+          jpm test
+        ''
+        else
+        "";
 
       buildPhase = ''
         jpm build
