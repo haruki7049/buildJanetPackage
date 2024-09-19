@@ -3,13 +3,15 @@
     <head id="head">
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="$site.asset('css/fonts.css').link()">
-        <link rel="stylesheet" type="text/css" href="$site.asset('css/toppage.css').link()">
+        <link rel="stylesheet" type="text/css" href="$site.asset('css/docs.css').link()">
         <title id="title" :text="$page.title"></title>
     </head>
     <body id="body">
         <header>
             <h1 :text="$page.title"></h1>
         </header>
+
+        <hr>
 
         <main id="content" :html="$page.content()"></main>
 

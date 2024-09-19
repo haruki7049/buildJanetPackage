@@ -1,7 +1,11 @@
 ---
-.title = "Documents for buildJanetPackage v0.1.0",
+.title = "buildJanetPackage v0.1.0",
 .author = "haruki7049",
 .date = @date("2024-09-19T00:00:00"),
 .layout = "docs.shtml",
 .draft = false,
 ---
+
+# How to use
+
+TODO...
