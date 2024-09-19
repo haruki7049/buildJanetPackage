@@ -8,5 +8,12 @@ pub fn build(b: *std.Build) void {
         .layouts_dir_path = "layouts",
         .content_dir_path = "content",
         .assets_dir_path = "assets",
+
+        .static_assets = &.{
+            "fonts/UDEVGothicNF-Regular.ttf",
+            "css/fonts.css",
+            "css/toppage.css",
+            "favicon.ico",
+        },
     });
 }
