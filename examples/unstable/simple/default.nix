@@ -14,7 +14,5 @@ janetBuilder.buildJanetPackage {
   src = ./.;
   depsFile = ./deps.nix;
 
-  executableFiles = [
-    "simple"
-  ];
+  executableFiles = [ "simple" ];
 }

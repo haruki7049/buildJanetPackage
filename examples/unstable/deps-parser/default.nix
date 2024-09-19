@@ -15,7 +15,5 @@ janetBuilder.buildJanetPackage {
   src = lib.cleanSource ./.;
   depsFile = ./deps.nix;
 
-  executableFiles = [
-    "deps-parser"
-  ];
+  executableFiles = [ "deps-parser" ];
 }
