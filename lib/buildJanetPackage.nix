@@ -46,8 +46,6 @@
         jpm build
       '';
 
-      installPhase = pkgs.callPackage ./installScripts.nix {
-        inherit pname executableFiles binscriptFiles;
-      };
+      inherit (pkgs.callPackage ./scripts.nix { inherit pname executableFiles binscriptFiles; }) installPhase;
     };
 }
