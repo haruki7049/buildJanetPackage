@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head id="head">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="$site.asset('css/fonts.css').link()">
+        <link rel="stylesheet" type="text/css" href="$site.asset('css/toppage.css').link()">
+        <title id="title" :text="$page.title"></title>
+    </head>
+    <body id="body">
+        <header>
+            <h1>buildJanetPackage</h1>
+        </header>
+
+        <main id="content" :html="$page.content()"></main>
+
+        <hr>
+
+        <footer>
+            <p>This site is hosted under MIT license using GitHub Pages.</p>
+            <p>Repository: <a href="https://github.com/haruki7049/buildJanetPackage">https://github.com/haruki7049/buildJanetPackage</a></p>
+            <p>BTW, I use NixOS. Wanna use NixOS? <a href="https://nixos.org">https://nixos.org</a></p>
+        </footer>
+    </body>
+</html>

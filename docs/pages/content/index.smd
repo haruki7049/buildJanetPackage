@@ -1,0 +1,9 @@
+---
+.title = "Homepage and documents for buildJanetPackage",
+.author = "haruki7049",
+.date = @date("2024-09-19T00:00:00"),
+.layout = "toppage.shtml",
+.draft = false,
+---
+
+- [Documents]($link.page("docs"))
