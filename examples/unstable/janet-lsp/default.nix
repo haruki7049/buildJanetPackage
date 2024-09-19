@@ -18,4 +18,8 @@ janetBuilder.buildJanetPackage rec {
     leaveDotGit = true;
   };
   depsFile = ./deps.nix;
+
+  binscriptFiles = [
+    "janet-lsp"
+  ];
 }
