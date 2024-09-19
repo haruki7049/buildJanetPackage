@@ -8,7 +8,7 @@
     </head>
     <body id="body">
         <header>
-            <h1>buildJanetPackage</h1>
+            <h1 :text="$page.title"></h1>
         </header>
 
         <main id="content" :html="$page.content()"></main>

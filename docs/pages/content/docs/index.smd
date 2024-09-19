@@ -1,0 +1,10 @@
+---
+.title = "Documents for buildJanetPackage",
+.author = "haruki7049",
+.date = @date("2024-09-19T00:00:00"),
+.layout = "docs.shtml",
+.draft = false,
+---
+
+# For specified version
+- [v0.1.0]($link.page("docs/v0.1.0"))
