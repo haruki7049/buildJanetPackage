@@ -32,7 +32,7 @@
         in
         {
           treefmt = {
-            projectRootFile = "treefmt.nix";
+            projectRootFile = "flake.nix";
             programs.nixfmt.enable = true;
             programs.zig.enable = true;
             programs.shellcheck.enable = true;
