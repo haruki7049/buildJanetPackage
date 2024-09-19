@@ -28,7 +28,14 @@
             http-server = pkgs.callPackage ./examples/unstable/http-server { };
             deps-parser = pkgs.callPackage ./examples/unstable/deps-parser { };
             janet-lsp = pkgs.callPackage ./examples/unstable/janet-lsp { };
+
+            # For v0.1.0
             simple-v0-1-0 = pkgs.callPackage ./examples/v0.1.0/simple { };
+
+            # For v0.2.0
+            simple-v0-2-0 = pkgs.callPackage ./examples/v0.2.0/simple { };
+            deps-parser-v0-2-0 = pkgs.callPackage ./examples/v0.2.0/deps-parser { };
+            http-server-v0-2-0 = pkgs.callPackage ./examples/v0.2.0/http-server { };
           };
         in
         {
@@ -48,10 +55,17 @@
           checks = {
             inherit (examples)
               simple
-              simple-v0-1-0
               http-server
               janet-lsp
               deps-parser
+
+              # v0.1.0
+              simple-v0-1-0
+
+              # v0.2.0
+              simple-v0-2-0
+              deps-parser-v0-2-0
+              http-server-v0-2-0
               ;
           };
 
