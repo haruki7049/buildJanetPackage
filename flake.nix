@@ -57,6 +57,7 @@
               simple
               http-server
               deps-parser
+              spork
 
               # v0.1.0
               simple-v0-1-0
