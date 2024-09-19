@@ -3,6 +3,7 @@
   pname,
   executableFiles,
   binscriptFiles,
+  doCheck,
 }:
 
 let
@@ -24,4 +25,12 @@ in
       ''
         install -m755 build/${pname} $out/bin/${pname}
       '');
+
+  configurePhase =
+    if doCheck then
+      ''
+        jpm test
+      ''
+      else
+      "";
 }

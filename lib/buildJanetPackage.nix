@@ -34,18 +34,10 @@
       JANET_LIBPATH = "${pkgs.janet}/lib";
       JANET_MODPATH = "${vendor}/lib";
 
-      configurePhase =
-        if doCheck then
-        ''
-          jpm test
-        ''
-        else
-        "";
-
       buildPhase = ''
         jpm build
       '';
 
-      inherit (pkgs.callPackage ./scripts.nix { inherit pname executableFiles binscriptFiles; }) installPhase;
+      inherit (pkgs.callPackage ./scripts.nix { inherit pname executableFiles binscriptFiles doCheck; }) installPhase configurePhase;
     };
 }
