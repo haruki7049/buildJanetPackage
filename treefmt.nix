@@ -4,5 +4,8 @@
   programs.shellcheck.enable = true;
   programs.actionlint.enable = true;
 
-  settings.formatter.shellcheck.excludes = [ ".envrc" "docs/pages/.envrc" ];
+  settings.formatter.shellcheck.excludes = [
+    ".envrc"
+    "docs/pages/.envrc"
+  ];
 }
