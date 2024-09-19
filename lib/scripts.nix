@@ -26,6 +26,10 @@ in
         install -m755 build/${pname} $out/bin/${pname}
       '');
 
+  buildPhase = ''
+    jpm build
+  '';
+
   configurePhase =
     if doCheck then
       ''
