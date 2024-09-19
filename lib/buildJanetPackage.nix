@@ -9,9 +9,11 @@
       depsFile,
       doCheck ? false,
       deps ? pkgs.callPackage depsFile { },
+      executableFiles ? [ ], # [ "executable-bin" "test-bin" ]
     }:
     let
       stdenv = pkgs.stdenv;
+      lib = pkgs.lib;
 
       # vendor is drv.
       vendor = pkgs.callPackage ./vendor {
@@ -44,9 +46,16 @@
         jpm build
       '';
 
-      installPhase = ''
-        mkdir -p $out/bin
-        install -m755 build/${pname} $out/bin/${pname}
-      '';
+      installPhase =
+        if builtins.length executableFiles != 0 then
+        ''
+          mkdir -p $out/bin
+          ${lib.strings.concatLines (map (v: "install -m755 build/${v} $out/bin/${v}") executableFiles)}
+        ''
+        else
+        ''
+          mkdir -p $out/bin
+          install -m755 build/${pname} $out/bin/${pname}
+        '';
     };
 }

@@ -13,4 +13,8 @@ janetBuilder.buildJanetPackage {
   version = "0.1.0";
   src = ./.;
   depsFile = ./deps.nix;
+
+  executableFiles = [
+    "http-server"
+  ];
 }
