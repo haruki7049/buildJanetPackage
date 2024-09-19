@@ -1,56 +1,68 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
-      treefmt-nix,
-      ...
-    }:
-    {
-      buildJanetPackage = pkgs: import ./lib/buildJanetPackage.nix { inherit pkgs; };
-    }
-    // flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-        treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
-        examples = {
-          simple = pkgs.callPackage ./examples/unstable/simple/default.nix { };
-          http-server = pkgs.callPackage ./examples/unstable/http-server/default.nix { };
-          deps-parser = pkgs.callPackage ./examples/unstable/deps-parser/default.nix { };
-          simple-v0-1-0 = pkgs.callPackage ./examples/v0.1.0/simple/default.nix { };
-        };
-      in
-      {
-        formatter = treefmtEval.config.build.wrapper;
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "aarch64-darwin"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
+      imports = [ inputs.treefmt-nix.flakeModule ];
 
-        checks = {
-          formatting = treefmtEval.config.build.check self;
-          inherit (examples)
-            simple
-            simple-v0-1-0
-            http-server
-            deps-parser
-            ;
-        };
+      flake = {
+        buildJanetPackage = pkgs: import ./lib/buildJanetPackage.nix { inherit pkgs; };
+      };
 
-        devShells.default = pkgs.mkShell {
-          packages = [
-            # Nix
-            pkgs.nil
+      perSystem =
+        { pkgs, ... }:
+        let
+          examples = {
+            simple = pkgs.callPackage ./examples/unstable/simple { };
+            http-server = pkgs.callPackage ./examples/unstable/http-server { };
+            deps-parser = pkgs.callPackage ./examples/unstable/deps-parser { };
+            simple-v0-1-0 = pkgs.callPackage ./examples/v0.1.0/simple { };
+          };
+        in
+        {
+          treefmt = {
+            projectRootFile = "treefmt.nix";
+            programs.nixfmt.enable = true;
+            programs.zig.enable = true;
+            programs.shellcheck.enable = true;
+            programs.actionlint.enable = true;
 
-            # Janet
-            pkgs.janet
-            pkgs.jpm
-          ];
+            settings.formatter.shellcheck.excludes = [
+              ".envrc"
+              "docs/pages/.envrc"
+            ];
+          };
+
+          checks = {
+            inherit (examples)
+              simple
+              simple-v0-1-0
+              http-server
+              deps-parser
+              ;
+          };
+
+          devShells.default = pkgs.mkShell {
+            packages = [
+              # Nix
+              pkgs.nil
+
+              # Janet
+              pkgs.janet
+              pkgs.jpm
+            ];
+          };
         };
-      }
-    );
+    };
 }
