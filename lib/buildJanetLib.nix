@@ -7,8 +7,6 @@
   depsFile,
   doCheck ? false,
   deps ? pkgs.callPackage depsFile { },
-  executableFiles ? [ ], # [ "executable-bin" "test-bin" ]
-  binscriptFiles ? [ ], # [ "binscript" "test-script" ]
 }:
 let
   stdenv = pkgs.stdenv;
@@ -31,20 +29,21 @@ stdenv.mkDerivation {
   JANET_PATH = "${pkgs.janet}/lib";
   JANET_LIBPATH = "${pkgs.janet}/lib";
   JANET_MODPATH = "${vendor}/lib";
-  JANET_BINPATH = "$out/bin";
 
-  inherit
-    (pkgs.callPackage ./scripts.nix {
-      inherit
-        pname
-        executableFiles
-        binscriptFiles
-        doCheck
-        vendor
-        ;
-    })
-    installPhase
-    configurePhase
-    buildPhase
-    ;
+  buildPhase = ''
+    jpm install --local
+  '';
+
+  installPhase = ''
+    mkdir $out
+    cp -r jpm_tree/* $out
+  '';
+
+  configurePhase =
+    if doCheck then
+      ''
+        jpm test
+      ''
+    else
+      "";
 }
