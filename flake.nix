@@ -27,7 +27,7 @@
             simple = pkgs.callPackage ./examples/unstable/simple { };
             http-server = pkgs.callPackage ./examples/unstable/http-server { };
             deps-parser = pkgs.callPackage ./examples/unstable/deps-parser { };
-            spork = pkgs.callPackage ./examples/unstable/spork { };
+            #spork = pkgs.callPackage ./examples/unstable/spork { }; # This drv cannot be built...
 
             # For v0.1.0
             simple-v0-1-0 = pkgs.callPackage ./examples/v0.1.0/simple { };
@@ -57,7 +57,7 @@
               simple
               http-server
               deps-parser
-              spork
+              #spork # This drv cannot be built...
 
               # v0.1.0
               simple-v0-1-0
