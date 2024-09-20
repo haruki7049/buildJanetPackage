@@ -17,15 +17,13 @@ in
     "mkdir -p $out/bin\n"
     + (
       if length executableFiles != 0 && length binscriptFiles != 0 then
-        throw "TODO: using binscriptFiles and executableFiles is not implemented"
+        throw "TODO: using binscriptFiles is not implemented"
       else if length executableFiles != 0 && length binscriptFiles == 0 then
         ''
           ${lib.strings.concatLines (map (v: "install -m755 build/${v} $out/bin/${v}") executableFiles)}
         ''
       else if length executableFiles == 0 && length binscriptFiles != 0 then
-        ''
-          ${lib.strings.concatLines (map (v: "install -m755 jpm_tree/bin/${v} $out/bin/${v}") binscriptFiles)}
-        ''
+        throw "TODO: using binscriptFiles is not implemented"
       else
         ''
           install -m755 build/${pname} $out/bin/${pname}
@@ -34,11 +32,7 @@ in
 
   buildPhase =
     if length binscriptFiles != 0 then
-      ''
-        mkdir -p jpm_tree/lib
-        cp -r ${vendor}/* jpm_tree/
-        jpm install --local
-      ''
+      throw "TODO: using binscriptFiles is not implemented"
     else
       ''
         jpm build
@@ -51,6 +45,4 @@ in
       ''
     else
       "";
-
-  JANET_MODPATH = "${vendor}/lib";
 }
